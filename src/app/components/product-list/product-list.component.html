@@ -1,0 +1,22 @@
+<div class="product-List my-5">
+   <div class="container">
+    <div class="row my-5">
+        <div *ngFor="let item of allProducts " class="col-md-4 col-sm-12 ">
+            <div (click)="goToProductDetails(item?.id)"  class="item my-5">
+                <div class="image">
+                    <img  [src]="item?.url"/>
+                </div>
+                <div class="title text-center">
+                    <p>{{item?.name}}</p>
+                    <p><span *ngIf="item?.price">$</span>{{item?.price}}</p>
+                    <select class="form-control w-50 m-auto my-3">
+                        <option  *ngFor="let i of allSelectoptions " [value]="i">{{i}}</option>
+                    </select>
+                    <button class="btn btn-primary my-3">Add To Cart</button>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
+</div>
