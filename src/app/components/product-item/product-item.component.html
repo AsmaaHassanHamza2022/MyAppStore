@@ -1,0 +1,18 @@
+
+<div  class="item my-5">
+    <div class="image" (click)="goToProductDetails(item?.id)" >
+        <img  [src]="item?.url"/>
+    </div>
+    <div class="title text-center">
+        <p>{{item?.name}}</p>
+        <p><span *ngIf="item?.price">$</span>{{item?.price}}</p>
+        <select [(ngModel)]="productCount" (ngModelChange)="selectProductsCount($event,item?.price)" class="form-control w-50 m-auto my-3">
+            <option  *ngFor="let i of allSelectoptions " [value]="i">{{i}}</option>
+        </select>
+        <button (click)="addToCart()" class="btn btn-primary my-3">Add To Cart</button>
+       
+    </div>
+</div>
+
+<!-- *ngFor="let item of allProducts " -->
+<!--  -->

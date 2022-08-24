@@ -1,17 +1,28 @@
-<div class="details">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 ">
+<div class="details ">
+    <div class="container w-75 ">
+        <div class="row ">
+            <div class="col-md-4 col-sm-12">
                 <div class="image d-flex align-items-center ">
-                    <img class="img-fluid" [src]="product?.url"/>
+                    <img [src]="product?.url"/>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="item-desc">
-                    <h4 class="title">{{product?.name}}</h4>
-                    <h5 class="price">{{product?.price}}</h5>
-                    <h4 class="desc">{{product?.description}}</h4>
-                    <button class ="btn btn-primary">Add To Cart</button>
+            <div class="col-md-8 col-sm-12">
+                <div class="content  h-100 d-flex align-items-center  ">
+                    <div class="item-desc h-50">
+                        <h4 class="title my-2">{{product?.name}}</h4>
+                        <p class="price  my-2"><span *ngIf="product?.price">$</span>{{product?.price}}</p>
+                        <p class="desc  my-2">{{product?.description}}</p>
+                        <select class="form-control m-auto my-3" [(ngModel)]="productCount" (ngModelChange)="selectProductsCount($event,product?.price)">
+                            <option  *ngFor="let i of allSelectoptions " [value]="i">{{i}}</option>
+                        </select>
+                        <button (click)="addToCart()" class ="btn btn-primary w-100">Add To Cart</button>
+                        <a class="my-3 d-block" routerLink="/productlist">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                              </svg>
+                            Back to product list
+                        </a>
+                    </div>
                 </div>
 
             </div>

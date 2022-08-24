@@ -16,6 +16,10 @@ export class ProductItemDetailComponent implements OnInit {
   public productId: number = 0;
   public product: productModel = {} as productModel;
   public productArr: productModel[] = [];
+  public allSelectoptions:number[]=[1,2,3,4,5,6,7,8,9,10]
+  public productCount:string=" ";
+  public productPrice:number=0;
+  public count:number=0;
 
   constructor(private route: ActivatedRoute, private _StoreService: StoreService) {
 
@@ -55,6 +59,31 @@ export class ProductItemDetailComponent implements OnInit {
     }
 
   }
+  //****************get selected product *******************
 
+  selectProductsCount(count:any,price:any){
+    this.count=Number(count);
+    this.productPrice=this.calculateTotalPricePerProduct(price,count);
+    console.log(this.productPrice);
+
+  }
+
+//**************** add to cart *******************
+
+  addToCart(){
+    let item={
+     item:this.product,
+     totalCostForItem:this.productPrice,
+     count:this.count
+   }
+   
+   this._StoreService.addToCart(item);
+ }
+
+ //**************** Calculate price*******************
+
+ calculateTotalPricePerProduct(unitPrice:number,count:number){
+  return unitPrice *count
+}
 
 }

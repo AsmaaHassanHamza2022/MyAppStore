@@ -6,3 +6,16 @@ export interface productModel {
     "url": string,
     "description":string,
 }
+
+export interface cartItem{
+    item:productModel,
+    totalCostForItem:number,
+    count:number
+}
+
+export interface userData{
+    name:string;
+    address:string;
+    credit:string;
+
+}
