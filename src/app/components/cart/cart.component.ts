@@ -63,7 +63,7 @@ export class CartComponent implements OnInit {
 
         if (newCount == 0) {
           this.cartProductList.splice(i, 1);
-          console.log(this.cartProductList)
+          alert("Removed from Cart ")
         } else {
           //modify count number and total cost for Item
 
