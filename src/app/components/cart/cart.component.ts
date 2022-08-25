@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { cartItem, userData } from 'src/app/model/model';
+import { CartServiceService } from 'src/app/services/cart-service.service';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
@@ -15,12 +16,12 @@ export class CartComponent implements OnInit {
   //******************************Data***************************** */
   public cartProductList: cartItem[] = [];
   public totalPrice: number = 0;
-  public allSelectoptions: number[] = [0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  public allSelectoptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   public checkoutForm: any;
   public submitted: boolean = false;
   // public userData: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private _StoreService: StoreService, private fb: FormBuilder, private router: Router) {
+  constructor(private _StoreService: StoreService, private fb: FormBuilder, private router: Router ,private _CartServiceService:CartServiceService) {
     this.createForm();
     this.cartProductList = this._StoreService.cartList;
     this.calculateCartTotalPrice();
@@ -40,39 +41,14 @@ export class CartComponent implements OnInit {
   }
 
   calculateCartTotalPrice(list?:any[]) {
-    this.totalPrice=0;
-    let productList=[];
 
-    if(list !=null){
-      productList=list
-    }else{
-      productList=this.cartProductList;
-    }
-
-    productList.forEach((item) => {
-      this.totalPrice += item.totalCostForItem;
-    })
-
+    this.totalPrice=this._CartServiceService.calculateCartTotalPrice(this.cartProductList,list);
+   
   }
 
   reCalcTotalPrice(newCount: any, targetProduct: any) {
-    this.totalPrice = 0;
 
-    this.cartProductList.forEach((pro, i) => {
-      if (pro.item.id == targetProduct.id) {
-
-        if (newCount == 0) {
-          this.cartProductList.splice(i, 1);
-          alert("Removed from Cart ")
-        } else {
-          //modify count number and total cost for Item
-
-          pro.count = newCount;
-          pro.totalCostForItem = newCount * pro.item.price;
-        }
-      }
-      this.calculateCartTotalPrice(this.cartProductList);
-    })
+   this.totalPrice= this._CartServiceService.reCalcTotalPrice(this.cartProductList,newCount,targetProduct)
 
   }
 
@@ -82,6 +58,13 @@ export class CartComponent implements OnInit {
     localStorage.setItem("userData",JSON.stringify({name:this.checkoutForm.get('name')?.value , totalPrice:this.totalPrice}));
     // this.userData.next(this.checkoutForm.get('name')?.value);
     this.router.navigate(["/confirmation"]);
+
+  }
+
+  delete(id:any){
+    let newValues=this._CartServiceService.deletProduct(this.cartProductList,id)
+    this.cartProductList=newValues.newList;
+    this.totalPrice=newValues.price;
 
   }
 }
