@@ -14,9 +14,10 @@
                             <select [(ngModel)]="product.count" (ngModelChange)="reCalcTotalPrice($event,product.item)">
                                 <option *ngFor="let i of allSelectoptions " [value]="i">{{i}}</option>
                             </select>
-                            <button (click)="delete(product.item.id)" class="btn btn-danger my-2">Delete Product</button>
+                            <button (click)="delete(product.item.id)" class="btn btn-danger my-2">Delete
+                                Product</button>
                         </div>
-                      
+
 
                     </div>
 
@@ -30,13 +31,13 @@
             </div>
             <div class="col-md-6 col-sm-12">
 
-                <form [formGroup]="checkoutForm" (ngSubmit)="submit()"  class="p-3">
+                <form [formGroup]="checkoutForm" (ngSubmit)="submit()" class="p-3">
                     <div class="form-group my-2">
                         <label> Full name</label>
                         <input class="form-control" formControlName="name" placeholder="minimum 3 character" />
                         <div *ngIf="!checkoutForm.get('name')?.valid && (checkoutForm.get('name')?.touched)">
                             <div *ngIf="checkoutForm.get('name').errors.required" class="text-danger my-2">
-                                 Name is required
+                                Name is required
                             </div>
                             <div *ngIf="checkoutForm.get('name').errors.minlength" class="text-danger my-2">
                                 Min Length is 3
@@ -48,7 +49,7 @@
                         <input class="form-control" formControlName="address" placeholder="minimum 3 character" />
                         <div *ngIf="!checkoutForm.get('address')?.valid && (checkoutForm.get('address')?.touched)">
                             <div *ngIf="checkoutForm.get('address').errors.required" class="text-danger my-2">
-                               Address is required
+                                Address is required
                             </div>
                             <div *ngIf="checkoutForm.get('address').errors.minlength" class="text-danger my-2">
                                 Min Length is 6
@@ -57,10 +58,12 @@
                     </div>
                     <div class="form-group my-2">
                         <label> Credit Card Number</label>
-                        <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')" class="form-control" formControlName="credit" placeholder="(16-digit number)" maxlength="16"/>
+                        <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
+                            class="form-control" formControlName="credit" placeholder="(16-digit number)"
+                            maxlength="16" />
                         <div *ngIf="!checkoutForm.get('credit')?.valid && (checkoutForm.get('credit')?.touched)">
                             <div *ngIf="checkoutForm.get('credit').errors.required" class="text-danger my-2">
-                               Credit Number is required
+                                Credit Number is required
                             </div>
                             <div *ngIf="checkoutForm.get('credit').errors.minlength" class="text-danger my-2">
                                 Min Length is 16
@@ -72,7 +75,8 @@
                     </div>
 
                     <div class="action my-3">
-                        <button type="submit" [disabled]="submitted || checkoutForm.invalid "  class="btn btn-primary"> Submit</button>
+                        <button type="submit" [disabled]="submitted || checkoutForm.invalid " class="btn btn-primary">
+                            Submit</button>
                     </div>
 
                 </form>

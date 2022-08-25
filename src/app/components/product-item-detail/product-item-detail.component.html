@@ -12,7 +12,8 @@
                         <h4 class="title my-2">{{product?.name}}</h4>
                         <p class="price  my-2"><span *ngIf="product?.price">$</span>{{product?.price}}</p>
                         <p class="desc  my-2">{{product?.description}}</p>
-                        <select class="form-control m-auto my-3" [(ngModel)]="productCount" (ngModelChange)="selectProductsCount($event,product?.price)">
+                        <select class="form-select form-select-sm m-auto my-3" [(ngModel)]="productCount" (ngModelChange)="selectProductsCount($event,product?.price)">
+                            <option class="text-white text-bolder bg-primary" selected >{{productCount}}</option>
                             <option  *ngFor="let i of allSelectoptions " [value]="i">{{i}}</option>
                         </select>
                         <button (click)="addToCart()" class ="btn btn-primary w-100">Add To Cart</button>

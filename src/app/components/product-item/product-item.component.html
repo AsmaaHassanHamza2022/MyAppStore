@@ -6,8 +6,9 @@
     <div class="title text-center">
         <p>{{item?.name}}</p>
         <p><span *ngIf="item?.price">$</span>{{item?.price}}</p>
-        <select [(ngModel)]="productCount" (ngModelChange)="selectProductsCount($event,item?.price)" class="form-control w-50 m-auto my-3">
-            <option  *ngFor="let i of allSelectoptions " [value]="i">{{i}}</option>
+        <select  [(ngModel)]="productCount" (ngModelChange)="selectProductsCount($event,item?.price)" class="form-select form-select-sm w-50 m-auto my-3">
+            <option  selected >{{productCount}}</option>
+            <option  *ngFor="let num of allSelectoptions ;let i=index " [value]="num">{{num}}</option>
         </select>
         <button (click)="addToCart()" class="btn btn-primary my-3">Add To Cart</button>
        

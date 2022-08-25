@@ -22,7 +22,7 @@ export class ProductItemComponent implements OnInit {
 
   /******************************data********************************* */
   public allSelectoptions:number[]=[1,2,3,4,5,6,7,8,9,10];
-  public productCount:string=" ";
+  public productCount:string="1";
   public productPrice:number=0;
   public count:number=0;
 
